@@ -16,6 +16,27 @@ import DialogTitle from "@mui/material/DialogTitle";
 import axios from "axios";
 
 function Task(props) {
+
+  const[isRadio, setIsRadio] = React.useState(false);
+  const handleSelect = async (e) => {
+    let selectID = e.target.parentElement.parentElement.className;
+    console.log("select key pressed")
+    setIsRadio(+e.currentTarget.value, isRadio );
+    console.log("radio activated", isRadio)
+    const tskList = { id: props.taskid};
+    console.log("tasklist",tskList);
+    let reqUrl = "http://127.0.0.1:9000/Tech/edit";
+    await axios
+      .post(reqUrl, tskList)
+      .then((res) => {
+        handleClose();
+      })
+      .catch((e) => console.log("E-->", e));
+      setOpen(false);
+      //window.location.reload();
+  
+  
+  }
   
   const [del, setDel] = React.useState(false);
   const handleDelSubmit = async (e) => {
@@ -43,38 +64,7 @@ function Task(props) {
       // }, 5000);
   };
 
-  
 
-  // async function handleDelete(e) {
-  //   let taskId = e.target.parentElement.parentElement.className;
-
-  //   console.log("current value of title");
-  //   const tskList = { id: taskId };
-  //   let reqUrl = "http://127.0.0.1:9000/Tech/Del";
-  //   await axios
-  //     .post(reqUrl, tskList)
-  //     .then((res) => {
-  //       handleClose();
-  //     })
-  //     .catch((e) => console.log("E-->", e));
-  //   window.location.reload();
-  // }
-
-  // async function handleEdit(e) {
-  //   let editID = e.target.parentElement.parentElement.className;
-
-  //   console.log("current value of the task");
-  //   const tskList = { id: editID };
-  //   console.log(tskList);
-  //   let reqUrl = "http://127.0.0.1:9000/Tech/edit";
-  //   await axios
-  //     .post(reqUrl, tskList)
-  //     .then((res) => {
-  //       handleClose();
-  //     })
-  //     .catch((e) => console.log("E-->", e));
-  //   window.location.reload();
-  // }
   const [updatetask, setUpdatetask] = React.useState(false);
   const [updatetaskYes, setUpdatetaskYes] = React.useState(false);
   const [updatetaskNo, setUpdatetaskNo] = React.useState(true)
@@ -136,23 +126,6 @@ function Task(props) {
   }
 
   
-  /*
-
-      let handleId = e.target.parentElement.parentElement.className;
-
-    console.log("current value of the task");
-    const tskList = { id: handleId, open: open };
-    console.log(tskList);
-    let reqUrl = "http://127.0.0.1:9000/Tech/edit";
-    await axios
-      .post(reqUrl, tskList)
-      .then((res) => {
-        handleClose();
-      })
-      .catch((e) => console.log("E-->", e));
-  
-      */
-  
   const handleEditkey = async (e) => {
     setOpen(true);
   };
@@ -186,17 +159,21 @@ function Task(props) {
         paddingBlock: "5px",
       }}
     >
-      <p style={{ textAlign: "left", color: "black", marginLeft: "5px" }}>
+            <h4 style={{  display: "block", textAlign: "left", color: "black", marginLeft: "5px" }}>
+
         {props.name}
-      </p>
-      <p>
-        <Button
-          style={{ width: "5px", height: "18px", marginLeft: "80px", color: "black" }}
-          variant="outlined"
-          onClick={handleEditkey}
+      </h4>
+      <p> <Button
+          style={{ display: 'block',
+          width: 100, 
+          padding: 30, height: "18px", marginLeft: "300px", color: "black" }}
+          variant="inline"
+          onClick={handleDeleteKey}
+          size="lg"
         >
-          Edit{" "}
-        </Button>
+          Edit {" "}
+        </Button>{' '}
+
         <Dialog open={open} onClose={handlethree}>
           <DialogTitle>Edit</DialogTitle>
           <DialogContent>
@@ -240,11 +217,13 @@ function Task(props) {
           </DialogActions>
         </Dialog>
       </p>
-
       <p>
         <Button
-          style={{ width: "5px", height: "18px", marginLeft: "80px", color: "black" }}
-          variant="outlined"
+          style={{ display: 'block',
+          width: 700, 
+          padding: 10, height: "18px", marginLeft: "300px", color: "black" }}
+          variant="inline"
+          size="sm"
           onClick={handleDeleteKey}
         >
           Delete {" "}
@@ -264,20 +243,23 @@ function Task(props) {
         </Dialog>
       </p>
 
-      {/* <p>
-        {" "}
-        <button
-          id="delete-task"
-          onClick={handleDelete}
-          style={{ marginLeft: "100px" }}
-        >
-          Delete
-        </button>{" "}
-      </p> */}
-      <p style={{ textAlign: "left", color: "black", marginLeft: "5px" }}>      </p>
-      <p style={{ textAlign: "left", color: "black", marginLeft: "5px" }}>
+      <li> <input
+                type="radio"
+                checked={isRadio === 1}
+                onClick = {handleSelect}
+                name="setRadioInputYes"
+                onChange={setRadioInputYes}
+                value = "1"
+                id = 'radio1'
+              />Select 
+              </li>
+          
+
+
+   
+      <h4 style={{  display: "block", textAlign: "left", color: "black", marginLeft: "5px" }}>
         {props.is_completed ? <p>Yes </p> : <p>No </p>}
-      </p>
+      </h4>
     </div>
   );
 }

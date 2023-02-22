@@ -1,10 +1,14 @@
 import logo from "./logo.svg";
 import "./App.css";
+import "./index.css";
 import Task from "./components/Task.js";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Button } from "react-bootstrap";
 import Modal from "react-bootstrap/Modal";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Alert from 'react-bootstrap/Alert';
+
 // import Button from "@mui/material/Button";
 // import TextField from "@mui/material/TextField";
 // import Dialog from "@mui/material/Dialog";
@@ -32,28 +36,7 @@ function App() {
   const handleDuenot = () => setDue(false);
   const handleDue = () => setDue(true);
 
-  // const handleChange = async (event) => {
-  //   setTask(event.target.value);
-  //   let handleID = event.target.parentElement.parentElement.className;
-
-  //   console.log("current value of title", TaskOn);
-
-  //   const tskList = { title: TaskOn, is_completed: false };
-  //   console.log("sa",tskList);
-  //   let reqUrl = "http://127.0.0.1:9000/Tech/create";
-  //   await axios
-  //     .post(reqUrl, tskList)
-  //     .then((res) => {
-
-  //       setTask(res.data);
-  //       handleClose();
-  //       //window.location.reload();
-  //     })
-  //     .catch((event) => console.log("E-->", event));
-  // };
-  //   const handleClose = () => {
-  //   setTask(false);
-  // }
+  
   
   const [updateCreateResult, setupdateCreateResult] = React.useState(false)
   const [updatetaskYes, setUpdatetaskYes] = React.useState(false);
@@ -129,40 +112,11 @@ function App() {
     // setDue(e.target.value)
   };
 
-  // let titleData = async function () {
-  //   // const proxyurl = "https://cors-anywhere.herokuapp.com/";
-  //   let reqUrl = "http://127.0.0.1:9000/Tech";
-  //   let res = await axios.get(reqUrl).catch(function (error) {
-  //     console.log("This was the error --> ", error);
-  //   });
-  //   console.log("setting state data now!");
-  //   console.log("List tasks now -->", titles);
-  //   setTasks(res.data); //set tasks
-  //   console.log("List tasks now -->", titles);
-  // };
-
-  // let is_completeData = async function () {
-  //   let reqUrl = "http://127.0.0.1:9000/Tech";
-  //   let res = await axios.get(reqUrl).catch(function (error){
-  //     console.log("An error occurred",error);
-
-  //   })
-  //  console.log("List", completed);
-
-  //   setTasks(res.data);
-  //   console.log("List", completed);
-
-  // };
+  
   useEffect(() => {
-    // Anything in here is fired on component mount.
-    // console.log("Component example");
+     
     fetchData();
-    // titleData();
-    //is_completeData();
-    // return () => {
-    //     // Anything in here is fired on component unmount.
-    //     console.log("secondone");
-    // }
+    
   }, []);
 
   return (
@@ -188,70 +142,14 @@ function App() {
             Task App
           </h5>
 
-          {/* / //<div>
-         // <input
-            type="text"
-            id="message" // TODO:to be changed to unique id for the task in future versions.
-            name="message"
-            onChange={handleChange}
-            value={message}
-          /> */}
+          
           <div>
-            {/* <input
-              type="text"
-              id="message" // TODO:to be changed to unique id for the task in future versions.
-              name="message"
-              onChange={handleChange}
-            /> */}
-            {/* <Button
-              style={{ width: "5px", height: "18px", marginCenter: "80px" }}
-              variant="outlined"
-              onClick={handleShow}
-            >
-              Create
-            </Button>
-            <Dialog show={show} onClose={handleClose}>
-              <DialogTitle></DialogTitle>
-              <DialogContent>
-                <DialogContentText></DialogContentText>
-                <TextField
-                  autoFocus
-                   
-                  onChange={(event) => setTask(event.target.value)}
-                  margin="dense"
-                   
-                  label="I"
-                  type="text"
-                  fullWidth
-                  variant="standard"
-                />
-                <p>{TaskOn}</p>
-
-                <TextField
-                  autoFocus
-                   
-                  onChange={(event) => setDue(event.target.value)}
-                  margin="dense"
-                   
-                  label="I"
-                  type="text"
-                  fullWidth
-                  variant="standard"
-                />
-                <p>{dueOn}</p>
-              </DialogContent>
-              <DialogActions>
-                <Button onClick={handleClose}>Cancel</Button>
-                <Button onClick={handleChange}>Confirm</Button>
-              </DialogActions>
-            </Dialog> */}
-            <button
-              onClick={handleShow}
-              variant="outlined"
-              style={{ color: "black" }}
-            >
-              Create
-            </button>
+             
+          <Button variant="success" onClick={handleShow}>Create</Button>{' '}
+              
+              
+           
+           
             <Modal show={show} onHide={handleEnd}>
               <Modal.Header closeButton>
                 <Modal.Title>Create a new Entry</Modal.Title>
@@ -316,6 +214,7 @@ function App() {
               );
             })}
             <p>{updateCreateResult}</p>
+            
             {/* {taskList} */}
           </div>
 
@@ -326,21 +225,12 @@ function App() {
   );
 }
 
-// function handleChange() {
-
-// }
-
-// function handleCreate() {
-//   console.log();
-//   return <h2>{handleChange}</h2>;
-// }
-
-// function handleDelete() {
-//   console.log("delete clicked");
-// }
+ 
 
 function handleEdit() {
   console.log("inside edit");
 }
+
+//export default BasicExample;
 
 export default App;
