@@ -17,26 +17,7 @@ import axios from "axios";
 
 function Task(props) {
 
-  const[isRadio, setIsRadio] = React.useState(false);
-  const handleSelect = async (e) => {
-    let selectID = e.target.parentElement.parentElement.className;
-    console.log("select key pressed")
-    setIsRadio(+e.currentTarget.value, isRadio );
-    console.log("radio activated", isRadio)
-    const tskList = { id: props.taskid};
-    console.log("tasklist",tskList);
-    let reqUrl = "http://127.0.0.1:9000/Tech/edit";
-    await axios
-      .post(reqUrl, tskList)
-      .then((res) => {
-        handleClose();
-      })
-      .catch((e) => console.log("E-->", e));
-      setOpen(false);
-      //window.location.reload();
-  
-  
-  }
+
   
   const [del, setDel] = React.useState(false);
   const handleDelSubmit = async (e) => {
@@ -168,7 +149,7 @@ function Task(props) {
           width: 100, 
           padding: 30, height: "18px", marginLeft: "300px", color: "black" }}
           variant="inline"
-          onClick={handleDeleteKey}
+          onClick={handleEditkey}
           size="lg"
         >
           Edit {" "}
@@ -243,16 +224,7 @@ function Task(props) {
         </Dialog>
       </p>
 
-      <li> <input
-                type="radio"
-                checked={isRadio === 1}
-                onClick = {handleSelect}
-                name="setRadioInputYes"
-                onChange={setRadioInputYes}
-                value = "1"
-                id = 'radio1'
-              />Select 
-              </li>
+      
           
 
 

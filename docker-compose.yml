@@ -1,0 +1,26 @@
+version: '3.8'
+
+
+
+services:
+  mongodb_container:
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: rootpassword
+    ports:
+      - "9906:8000"
+    volumes:
+      - mongodb:/data/db
+
+
+
+
+volumes:
+    mongodb:
+
+
+
+
+    
+      
