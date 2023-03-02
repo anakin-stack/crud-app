@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const tech = require("../models/tech");
 
+
+
 router.get("/", async (req, res) => {
   console.log("got  request")
   try {
@@ -32,6 +34,7 @@ router.post('/create',  async(req, res) => {
 }
 })
 
+
 router.patch('/:id', async (req, res) => {
   try {
     const tec =  await tech.findById(req.params.id)
@@ -47,11 +50,10 @@ router.patch('/:id', async (req, res) => {
 
 router.post('/Del',  async (req, res) => {
   try {
-   
-   console.log(req.body.id);
-    const tec = await tech.findByIdAndRemove(req.body.id, function (err, data) {
-      console.log("Error while deleting task: ", err);
-    });
+    
+    console.log(req.body.id,"delbulk");
+    const tec = await tech.deleteMany({ _id: { $in: req.body.id }}, function(err) {})
+  
     
     
   } catch (err) {
@@ -59,6 +61,18 @@ router.post('/Del',  async (req, res) => {
   }
 });
 
+
+router.post('/deletemultiple', async (req, res)=> {
+
+  try {
+    console.log(req.body.id);
+    const tec = await tech.findByIdAndRemove(req.body.id, function (err, data){
+      console.log("Error while deleting Entries: ", err);
+    });
+  } catch (err) {
+    res.send('error')
+  }
+});
 
 
 router.post('/edit',  async (req, res, next) => {

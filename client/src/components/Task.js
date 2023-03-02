@@ -2,6 +2,7 @@ import React from "react";
 import show from "../App.js";
 import handleShow from "../App.js";
 import handleClose from "../App.js";
+
 // import Button from "react-bootstrap/Button";
 // import Modal from "react-bootstrap/Modal";
 import TaskOn from "../App.js";
@@ -16,6 +17,37 @@ import DialogTitle from "@mui/material/DialogTitle";
 import axios from "axios";
 
 function Task(props) {
+  
+  const [userinfo, setUserInfo] = React.useState({
+    languages: [],
+    response: [],
+  });
+  
+  const handleChecked = (e) => {
+    // Destructuring
+    const { value, checked } = e.target;
+    const { languages } = userinfo;
+      
+    console.log(`${value} is ${checked}`, "checked");
+     
+    // Case 1 : The user checks the box
+    if (checked) {
+      setUserInfo({
+        languages: [...languages, value],
+        response: [...languages, value],
+      });
+    }
+  
+    // Case 2  : The user unchecks the box
+    else {
+      setUserInfo({
+        languages: languages.filter((e) => e !== value),
+        response: languages.filter((e) => e !== value),
+      });
+    }
+  };
+
+
 
 
   
@@ -25,7 +57,7 @@ function Task(props) {
     setDel(true);
     let delID = e.target.parentElement.parentElement.className;
     console.log(delID)
-    
+      
     console.log("current value of the task", del);
     const tskList = { id: props.taskid };
     console.log(tskList);
@@ -201,7 +233,7 @@ function Task(props) {
       <p>
         <Button
           style={{ display: 'block',
-          width: 700, 
+          width: 70, 
           padding: 10, height: "18px", marginLeft: "300px", color: "black" }}
           variant="inline"
           size="sm"
@@ -223,6 +255,8 @@ function Task(props) {
           </DialogActions>
         </Dialog>
       </p>
+     
+      
 
       
           
@@ -232,7 +266,9 @@ function Task(props) {
       <h4 style={{  display: "block", textAlign: "left", color: "black", marginLeft: "5px" }}>
         {props.is_completed ? <p>Yes </p> : <p>No </p>}
       </h4>
+      
     </div>
+    
   );
 }
 
