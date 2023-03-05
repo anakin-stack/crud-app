@@ -10,6 +10,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Alert from "react-bootstrap/Alert";
 
 import handleChecked from "./components/Task.js";
+import DateTime from "./components/dateTime";
+import { textAlign } from "@mui/system";
 
 // import Button from "@mui/material/Button";
 // import TextField from "@mui/material/TextField";
@@ -203,23 +205,33 @@ function App() {
         <div
           style={{
             backgroundColor: "white",
-            border: "3px solid grey",
-            padding: "10px",
+            border: "3px black",
+            padding: "2px",
+            marginTop:"-2px"
             // width : 100,
             // height:200,
           }}
         >
           {/* This is the playground for your inner "white" part of the app */}
-          <h5
+          <h1
             style={{
-              color: "black",
+              display:"inline-block",
+              color: "black",marginLeft: "350px",
+             
+              borderBlockEnd  : '6px solid grey',
+              
             }}
           >
-            Task App
-          </h5>
+            Basic Task Manager App
+          </h1>
 
           <div>
-            <Button variant="success" onClick={handleShow}>
+            <h1>
+            <Button style={{
+                color: "black",marginLeft: "37px",
+                border : '5px solid black'
+              }}
+               variant="success" onClick={handleShow}>
               Create
             </Button>{" "}
             <Modal show={show} onHide={handleEnd}>
@@ -263,24 +275,16 @@ function App() {
                   Save Changes
                 </Button>
               </Modal.Footer>
-            </Modal>
-            <h2></h2>
-            <h4
+            </Modal></h1>
+            <h2><Button
               style={{
                 color: "black",
-              }}
-            >
-              Tasks{" "}
-            </h4>
-            <Button
-              style={{
-                color: "black",
-                marginLeft: "300px",
-              }}
+                marginLeft: "37px",
+                border : '5px solid black'              }}
               variant="success"
               onClick={handledelmulKeyshow}
             >
-              DeleteMultiple
+              Task List
             </Button>{" "}
             <Modal show={delmultKey} onHide={handledelmulKey}>
               <Modal.Header closeButton>
@@ -305,22 +309,30 @@ function App() {
                   Delete All
                 </Button>
               </Modal.Footer>
-            </Modal>
+            </Modal></h2>
+            {/* <h4>  
+            
+              Tasks{" "}
+                     </h4> */}
+            
             {/* {tasks.length == 0 ? <h1 style={{color: "black"}}>Loading</h1>: <h2 style={{color: "black"}}>tasks</h2>} */}
             {tasks.map((task) => {
               //console.log("this is the tasks ==> ", task);
               return (
-                <Task
+                
+                <ul><Task     
+                  
                   key={task._id}
                   taskid={task._id}
                   name={task.taskName}
                   is_completed={task.is_completed}
-                />
+                /></ul>
               );
             })}
+            
 
             
-            <p>{updateCreateResult}</p>
+            {/* <p>{updateCreateResult}</p> */}
             {/* <Button variant="success" onClick={bulkEdit} value= "">Edit</Button> {' '}
             <Button variant="success" onClick={bulkDelete} value= "">Delete</Button> {' '} */}
             {/* {taskList} */}
